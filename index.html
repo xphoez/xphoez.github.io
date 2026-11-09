@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>phoebe</title>
+<meta name="description" content="Phoebe designs products and makes small daily puzzle games.">
+<meta property="og:title" content="phoebe">
+<meta property="og:description" content="Small daily puzzle games, made by hand.">
+<meta property="og:image" content="https://xphoez.github.io/assets/og-mochi.png">
+<link rel="icon" href="assets/splash-momo.png">
+<link rel="preload" href="assets/fonts/caveat-700.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Caveat";src:url(assets/fonts/caveat-700.woff2) format("woff2");font-weight:600 700;font-display:swap}
+@font-face{font-family:"Patrick Hand";src:url(assets/fonts/patrick-hand.woff2) format("woff2");font-weight:400;font-display:swap}
+:root{
+  color-scheme:light;
+  --paper:#fbf7ee;
+  --card:#fffdf8;
+  --ink:#2b2926;
+  --ink-soft:#5d5952;
+  --red:#d9412f;
+  --hl:#ffe36e;
+  --tape:rgba(240,214,140,.75);
+  --hand:"Caveat",cursive;
+  --body:"Patrick Hand","Comic Sans MS",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{background:var(--paper)}
+body{
+  background:var(--paper);color:var(--ink);font-family:var(--body);
+  font-size:20px;line-height:1.45;min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+main{max-width:620px;margin:0 auto;padding:72px 16px 48px}
+
+.me{display:flex;align-items:center;gap:20px;margin-bottom:72px}
+.me img{width:84px;height:84px;flex:none;transform:rotate(-6deg)}
+h1{font-family:var(--hand);font-size:76px;line-height:.9;font-weight:700;letter-spacing:.5px}
+h1 span{background:linear-gradient(transparent 58%,var(--hl) 58%,var(--hl) 92%,transparent 92%);padding:0 6px;margin-left:-6px}
+.me p{margin-top:10px;color:var(--ink-soft)}
+
+h2{font-family:var(--hand);font-size:40px;font-weight:700;margin-bottom:22px}
+
+.game{
+  position:relative;display:block;background:var(--card);color:inherit;text-decoration:none;
+  border:2.5px solid var(--ink);border-radius:14px 18px 12px 16px;
+  padding:28px 26px 24px;box-shadow:5px 6px 0 var(--ink);
+  transform:rotate(-.6deg);transition:transform .15s ease, box-shadow .15s ease;
+}
+.game::before{
+  content:"";position:absolute;top:-14px;left:50%;width:110px;height:28px;margin-left:-55px;
+  background:var(--tape);transform:rotate(-3deg);
+}
+.game:hover{transform:rotate(0) translate(-2px,-2px);box-shadow:7px 8px 0 var(--ink)}
+.game:active{transform:translate(2px,2px);box-shadow:2px 3px 0 var(--ink)}
+.game:focus-visible{outline:3px solid var(--red);outline-offset:6px}
+
+.cast{display:flex;align-items:flex-end;gap:4px;margin-bottom:14px}
+.cast img{width:92px;height:92px}
+.cast img+img{width:78px;height:78px;transform:rotate(8deg)}
+.game h3{font-family:var(--hand);font-size:48px;line-height:1;font-weight:700}
+.game p{margin-top:8px;color:var(--ink-soft)}
+.play{
+  display:inline-flex;align-items:baseline;gap:10px;margin-top:20px;
+  font-size:22px;color:var(--red);
+}
+.play b{font-weight:400;border-bottom:2px solid var(--red)}
+.play small{font-size:18px;color:var(--ink-soft)}
+
+footer{margin-top:80px;color:var(--ink-soft);font-size:17px}
+
+@media (max-width:520px){
+  main{padding-top:48px}
+  .me{gap:14px;margin-bottom:56px}
+  .me img{width:64px;height:64px}
+  h1{font-size:60px}
+  .game{padding:24px 20px 20px}
+  .game h3{font-size:42px}
+  .cast img{width:76px;height:76px}
+  .cast img+img{width:64px;height:64px}
+}
+@media (prefers-reduced-motion:reduce){.game{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <header class="me">
+    <div>
+      <h1><span>phoebe</span></h1>
+      <p>I design products by day and make small games by night.</p>
+    </div>
+  </header>
+
+  <section>
+    <h2>games</h2>
+    <a class="game" href="mochi-meltdown/">
+      <div class="cast">
+        <img src="assets/splash-momo.png" alt="">
+        <img src="assets/splash-gary.png" alt="">
+      </div>
+      <h3>Mochi Meltdown</h3>
+      <p>A daily slide puzzle. Tilt the tray, get every mochi into the soup, and keep Gary out.</p>
+      <span class="play"><b>play today’s puzzle →</b><small id="today"></small></span>
+    </a>
+  </section>
+
+  <footer>© <span id="year">2026</span> phoebe</footer>
+</main>
+<script>
+(() => {
+  const n = new Date();
+  document.getElementById('year').textContent = n.getFullYear();
+  document.getElementById('today').textContent =
+    n.toLocaleDateString('en-US', { month:'short', day:'numeric', timeZone:'UTC' });
+})();
+</script>
+</body>
+</html>
